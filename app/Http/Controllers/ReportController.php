@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\project;
 use Illuminate\Support\Facades\DB;
 
-class AddController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +15,22 @@ class AddController extends Controller
      */
     public function index()
     {
-        $table=project::all()->toArray();
-        return view('ManageExpense.manageexpense',compact('table'));
+        $users = DB::table('projects')
+        ->whereBetween('Expense_Date', ['2020-04-05','2020-04-30'])
+        ->get();
+        return view('ReportExpense.reportexpense',compact('users'));
+        
 
     }
 
-     // * Show the form for creating a new resource.
-     // *
-     // * @return \Illuminate\Http\Response
-     // */
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('AddExpense.addexpense');
+        //
     }
 
     /**
@@ -90,8 +94,6 @@ class AddController extends Controller
      */
     public function destroy($id)
     {
-        $table=project::find($id);
-        $table->delete();
-        return redirect()->route('/')->with('success','Updated');
+        //
     }
 }
