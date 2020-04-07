@@ -54,5 +54,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('Add','AddController');
-Route::resource('Report','ReportController');
 
